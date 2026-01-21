@@ -4,7 +4,8 @@ import pandas as pd
 
 from typing import Dict
 
-ERP_DB_PATH = r"\\192.168.1.16\vsai\Empresas\LMX24"
+# CHANGE URL 
+ERP_DB_PATH = r"DIRECTORY_OF_DATA"
 
 YEAR = '2026'
 
