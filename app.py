@@ -1,5 +1,5 @@
 import streamlit as st
-from datetime import datetime 
+from datetime import datetime
 
 from src.config import MONTHS, BUSINESS_UNITS, PAGES, MP_SUBCLASSES,get_agents_dict, YEAR_OPTIONS, YEAR_INDEX
 from src.data.agents import get_agents_df
@@ -14,12 +14,12 @@ from views.purchases import render_purchases
 
 def main():
 
-    # Get agents from database 
+    # Get agents from database
     agents = get_agents_df()
     agents_dict = get_agents_dict(agents)
 
     with st.sidebar:
-        st.title("LAMINEX Dashboards")
+        st.title("Demo Dashboards")
         st.markdown("## GRAFICOS")
         page = st.selectbox("Página", PAGES, index=0)
 
@@ -38,19 +38,19 @@ def main():
         selected_classes = []
         for unit in business_units:
             selected_classes.extend(BUSINESS_UNITS[unit])
-            
+
         if page == 'Compras':
-            mp_subclasses = st.multiselect('Materia Prima', 
+            mp_subclasses = st.multiselect('Materia Prima',
                                            options=MP_SUBCLASSES,
                                            default=[])
         else:
-            classes = st.multiselect("Clases SAI", 
+            classes = st.multiselect("Clases SAI",
                                     options=[cls for group in BUSINESS_UNITS.values() for cls in group],
                                     default=selected_classes)
-            
+
         if page != 'Cartera':
             selected_year = st.selectbox('Selección de Año', YEAR_OPTIONS, index=YEAR_INDEX)
-        
+
 
     if page == "Facturación":
         render_sales(month, selected_year, classes)
