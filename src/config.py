@@ -4,8 +4,8 @@ import pandas as pd
 
 from typing import Dict
 
-# CHANGE URL 
-ERP_DB_PATH = r"DIRECTORY_OF_DATA"
+# CHANGE URL
+ERP_DB_PATH = os.path.join(os.getcwd(), "mocks")
 
 YEAR = '2026'
 
@@ -34,7 +34,7 @@ MONTHS = {
 
 MONTH_NAMES = list(MONTHS.keys())
 
-PAGES = ['Facturación', 'Trend de ventas', 'Compras', 'Producción', 'Cartera']
+PAGES = ['Facturación', 'Trend de ventas', 'Compras', 'Cartera']
 
 UNITS = ('MN', 'KG')
 
@@ -85,14 +85,14 @@ def get_past_month(curr_month : str, curr_year):
         return MONTH_NAMES[index - 1], curr_year
     else:
         return MONTH_NAMES[-1], str(int(curr_year) - 1)
-    
+
 def get_agents_dict(agents_df: pd.DataFrame) -> Dict[str, int]:
-    agents_df.drop(AGENTS_TO_FILTER, inplace=True)
+    agents_df.drop(AGENTS_TO_FILTER, inplace=True, errors='ignore')
     agentsDict = agents_df.reset_index().set_index('NOM_AGE')['CVE_AGE'].to_dict()
     return agentsDict
 
 def get_agents_filtered_list_ids(agents_df: pd.DataFrame, agents_names: list[str] | None) -> list[str]:
-    agents_df.drop(AGENTS_TO_FILTER, inplace=True)
+    agents_df.drop(AGENTS_TO_FILTER, inplace=True, errors='ignore')
     agents_dict = agents_df.reset_index().set_index('NOM_AGE')['CVE_AGE'].to_dict()
     agents_to_filter = [agents_dict[agent_name] for agent_name in agents_names]
 
