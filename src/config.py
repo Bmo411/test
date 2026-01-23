@@ -6,8 +6,8 @@ from typing import Dict
 
 # CHANGE URL
 # CHANGE URL
-ERP_DB_PATH = os.getenv("ERP_DB_PATH", os.path.join(os.path.dirname(os.path.dirname(__file__)), "mocks"))
-# This makes it default to mocks folder relative to this file, but overridable by env var.
+ERP_DB_PATH = os.getenv("ERP_DB_PATH", "https://lap.blueberrieslab.com/files")
+# This makes it default to the remote API, but overridable (e.g. to local mocks) by env var.
 
 # ... (Previous constants logic is unchanged, I need to match the hunk correctly)
 # I will try to target a smaller chunk.
