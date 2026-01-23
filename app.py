@@ -19,7 +19,7 @@ def main():
     agents_dict = get_agents_dict(agents)
 
     with st.sidebar:
-        st.title("Demo Dashboards")
+        st.title("Demo-connect Dashboards")
         st.markdown("## GRAFICOS")
         page = st.selectbox("Página", PAGES, index=0)
 
