@@ -5,7 +5,13 @@ import pandas as pd
 from typing import Dict
 
 # CHANGE URL
-ERP_DB_PATH = os.path.join(os.getcwd(), "mocks")
+# CHANGE URL
+ERP_DB_PATH = os.getenv("ERP_DB_PATH", os.path.join(os.path.dirname(os.path.dirname(__file__)), "mocks"))
+# This makes it default to mocks folder relative to this file, but overridable by env var.
+
+# ... (Previous constants logic is unchanged, I need to match the hunk correctly)
+# I will try to target a smaller chunk.
+
 
 YEAR = '2026'
 
@@ -61,6 +67,8 @@ AGENTS_TO_FILTER = [9999, 16, 9998, 9997, 2, 3, 4, 5, 6, 8, 12, 13, 14, 16, 17, 
 
 
 def get_table_conn(table_name: str) -> str:
+    if ERP_DB_PATH.startswith("http"):
+        return f"{ERP_DB_PATH.rstrip('/')}/{table_name}.dbf"
     return os.path.join(ERP_DB_PATH, f"{table_name}.dbf")
 
 
